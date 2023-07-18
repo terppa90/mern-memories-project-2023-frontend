@@ -1,5 +1,8 @@
 import {
   FETCH_ALL,
+  FETCH_BY_SEARCH,
+  END_LOADING,
+  START_LOADING,
   CREATE,
   UPDATE,
   DELETE,
@@ -8,11 +11,40 @@ import {
 import * as api from '../api/index.js';
 
 // Action Creators
-export const getPosts = () => async (dispatch) => {
-  try {
-    const { data } = await api.fetchPosts();
+// export const getPosts = () => async (dispatch) => {
+//   try {
+//     const { data } = await api.fetchPosts();
 
-    dispatch({ type: FETCH_ALL, payload: data });
+//     dispatch({ type: FETCH_ALL, payload: data });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const getPosts = (page) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
+  try {
+    const {
+      data: { data, currentPage, numberOfPages },
+    } = await api.fetchPosts(page);
+
+    dispatch({
+      type: FETCH_ALL,
+      payload: { data, currentPage, numberOfPages },
+    });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const {data: { data } } = await api.fetchPostsBySearch(searchQuery); // prettier-ignore
+
+    dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }
@@ -20,6 +52,7 @@ export const getPosts = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
