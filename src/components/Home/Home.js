@@ -15,7 +15,7 @@ import ChipInput from 'material-ui-chip-input';
 
 import { getPostsBySearch } from '../../actions/posts';
 import { getPosts } from '../../actions/posts';
-import Paginate from '../Pagination';
+import Pagination from '../Pagination';
 import Posts from '../Posts/Posts';
 import useStyles from './styles';
 import Form from '../Form/Form';
@@ -107,7 +107,7 @@ const Home = () => {
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             {!searchQuery && !tags.length && (
               <Paper className={classes.pagination} elevation={6}>
-                <Paginate page={page} />
+                <Pagination page={page} />
               </Paper>
             )}
           </Grid>

@@ -3,7 +3,7 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
-import memoriesLogo from '../../images/memoriesLogo.png';
+import memoriesLogo from '../../images/logo.png';
 import memoriesText from '../../images/memoriesText.png';
 import * as actionType from '../../constants/actionTypes';
 import decode from 'jwt-decode';
@@ -49,7 +49,7 @@ const Navbar = () => {
           className={classes.image}
           src={memoriesLogo}
           alt="icon"
-          height="40px"
+          height="50px"
         />
       </Link>
       <Toolbar className={classes.toolbar}>
