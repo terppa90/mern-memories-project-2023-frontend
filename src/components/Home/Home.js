@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Grow,
   Grid,
-  Paper,
   AppBar,
   TextField,
   Button,
+  Paper,
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-// import { MuiChipsInput } from 'mui-chips-input';
 import ChipInput from 'material-ui-chip-input';
 
 import { getPostsBySearch } from '../../actions/posts';
-import { getPosts } from '../../actions/posts';
-import Pagination from '../Pagination';
 import Posts from '../Posts/Posts';
-import useStyles from './styles';
 import Form from '../Form/Form';
+import Pagination from '../Pagination';
+import useStyles from './styles';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
 const Home = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const query = useQuery();
-  const navigate = useNavigate();
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
 
   const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -48,7 +46,6 @@ const Home = () => {
   };
 
   const handleKeyPress = (e) => {
-    // keycode === 13 means Enter
     if (e.keyCode === 13) {
       searchPost();
     }

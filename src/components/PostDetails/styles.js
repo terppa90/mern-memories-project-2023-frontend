@@ -19,6 +19,9 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     margin: '10px',
     flex: 1,
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
   },
   imageSection: {
     marginLeft: '20px',
@@ -28,8 +31,14 @@ export default makeStyles((theme) => ({
   },
   recommendedPosts: {
     display: 'flex',
+    // alignItems: 'center',
+    // alignContent: 'center',
+    // justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
+      alignItems: 'flex-start',
+      alignContent: 'flex-start',
+      justifyContent: 'flex-start',
     },
   },
   loadingPaper: {

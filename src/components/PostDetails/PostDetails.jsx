@@ -67,8 +67,8 @@ const PostDetails = () => {
           <Typography variant="body1">
             {moment(post.createdAt).fromNow()}
           </Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          {/* <Typography variant="body1">
+          {/* <Divider style={{ margin: '20px 0' }} />
+          <Typography variant="body1">
             <strong>Realtime Chat - coming soon!</strong>
           </Typography> */}
           <Divider style={{ margin: '20px 0' }} />
@@ -93,10 +93,14 @@ const PostDetails = () => {
           </Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(
-              ({ title, name, message, likes, selectedFile, _id }) => (
+            {recommendedPosts
+              .slice(0, 4)
+              .map(({ title, name, message, likes, selectedFile, _id }) => (
                 <div
-                  style={{ margin: '20px', cursor: 'pointer' }}
+                  style={{
+                    margin: '20px',
+                    cursor: 'pointer',
+                  }}
                   onClick={() => openPost(_id)}
                   key={_id}
                 >
@@ -114,8 +118,7 @@ const PostDetails = () => {
                   </Typography>
                   <img src={selectedFile} alt="picture" width="200px" />
                 </div>
-              )
-            )}
+              ))}
           </div>
         </div>
       )}
